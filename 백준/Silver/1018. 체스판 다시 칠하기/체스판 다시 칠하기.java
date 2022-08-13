@@ -66,7 +66,7 @@ public class Main {
 			}
 			check_WB = (!check_WB);
 		}
-		//min 이 더클경우 바꿈
+		//첫번째 색깔이 반대일 경우 경우의 수와 
 		cnt = Math.min(cnt,64-cnt);
 		
 		
