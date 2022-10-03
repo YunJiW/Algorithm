@@ -6,10 +6,10 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	public static boolean[] check;
 	public static int[] lotto;
 	public static int[] arr;
 	public static int k;
+	public static StringBuilder sb =new StringBuilder();
 
 	public static void main(String[] args) throws IOException {
 
@@ -21,10 +21,9 @@ public class Main {
 			k = Integer.parseInt(st.nextToken());
 			
 			if(k == 0)
-				return;
+				break;
 			lotto = new int[k];
 			arr= new int[6];
-			check = new boolean[k];
 
 			for (int index = 0; index < k; index++) {
 				lotto[index] = Integer.parseInt(st.nextToken());
@@ -32,8 +31,10 @@ public class Main {
 			dfs(0);
 			
 
-			System.out.println();
+			sb.append('\n');
 		}
+		
+		System.out.print(sb);
 	}
 	
 	
@@ -42,9 +43,9 @@ public class Main {
 		if(depth == 6)
 		{
 			for(int num : arr)
-				System.out.print(num + " ");
+				sb.append(num).append(" ");
 			
-			System.out.println();
+			sb.append('\n');
 			return;
 		}
 		
