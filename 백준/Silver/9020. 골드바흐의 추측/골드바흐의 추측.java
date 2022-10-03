@@ -16,9 +16,6 @@ public class Main {
 		isPrime();
 		while (T-- > 0) {
 			int N = Integer.parseInt(br.readLine());
-			int[] check = new int[2];
-			int min = Integer.MAX_VALUE;
-			int diff;
 			for(int index = 0 ;index <=N;index++)
 			{
 				if(!Sosu[N/2 - index ] && !Sosu[N/2 + index])
