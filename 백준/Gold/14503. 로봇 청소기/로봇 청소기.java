@@ -14,7 +14,7 @@ public class Main {
 	static int M;
 
 	// 북 동 남 서
-	static int[] dy = { -1, 0, 1, 0 };
+	static int[] dy = {-1, 0, 1, 0 };
 	static int[] dx = { 0, 1, 0, -1 };
 
 
