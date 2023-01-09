@@ -1,13 +1,13 @@
 class Solution {
 	
-	static int zero=0;
-	static int one =0;
+	int zero=0;
+	int one =0;
 	
 	public int[] solution(int[][] arr) {
 		int[] answer= new int[2];
 		
-		int N =arr.length;
-		check(arr,0,0,N);
+		
+		check(arr,0,0,arr.length);
 		
 		
 		answer[0]= zero;
@@ -47,7 +47,7 @@ class Solution {
 		
 		for(int rows = row; rows < row+N;rows++) {
 			for(int cols=col; cols<col+N;cols++) {
-				if(arr[rows][cols] != color)
+				if(arr[rows][col] != color)
 					return false;
 			}
 		}
