@@ -10,7 +10,7 @@ public class Solution {
                 n-=1;
                 ans++;
             }
-            
+
         }
 
         return ans;
