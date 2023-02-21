@@ -32,8 +32,8 @@ class Solution
 		for(String s: union) {
 			total += Math.max(Map1.getOrDefault(s, 0),Map2.getOrDefault(s,0));
 		}
-		for(String s:Map2.keySet()) {
-			if(Map1.containsKey(s)) {
+		for(String s:Map1.keySet()) {
+			if(Map2.containsKey(s)) {
 				answer+= Math.min(Map1.get(s), Map2.get(s));
 			}
 		}
