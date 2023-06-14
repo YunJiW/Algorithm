@@ -7,8 +7,9 @@ class Solution {
             convert.append(Integer.toString(idx,n));
         }
 
-        for(int idx =p-1; answer.length() <t;idx +=m){
+        for(int idx =0; answer.length() <t;idx +=m){
             answer.append(convert.charAt(idx));
+
         }
         return answer.toString().toUpperCase();
     }
