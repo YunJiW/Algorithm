@@ -17,10 +17,14 @@ public class Main {
     static int Rows;
     static int Cols;
 
+    static StringBuilder sb;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
+
+        sb = new StringBuilder();
 
         Rows = Integer.parseInt(st.nextToken());
         Cols = Integer.parseInt(st.nextToken());
@@ -43,30 +47,25 @@ public class Main {
 
         Start(start_row, start_col, 0);
 
-        Scan();
-
         print();
 
+        System.out.println(sb);
     }
 
     private static void print() {
         for (int row = 0; row < Rows; row++) {
             for (int col = 0; col < Cols; col++) {
-                System.out.print(Map[row][col] + " ");
+                if(!visited[row][col] && Map[row][col] == 1) {
+                    sb.append(-1);
+                }else{
+                    sb.append(Map[row][col]);
+                }
+                sb.append(" ");
             }
-            System.out.println();
+            sb.append("\n");
         }
     }
 
-    private static void Scan() {
-        for (int row = 0; row < Rows; row++) {
-            for (int col = 0; col < Cols; col++) {
-                if (!visited[row][col] && Map[row][col] != 0) {
-                    Map[row][col] = -1;
-                }
-            }
-        }
-    }
 
     private static void Start(int row, int col, int count) {
         Queue<int[]> queue = new LinkedList<>();
