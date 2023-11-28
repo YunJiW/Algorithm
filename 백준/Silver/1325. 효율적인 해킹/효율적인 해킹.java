@@ -1,68 +1,62 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    static boolean[] visit;
-    static int max = Integer.MIN_VALUE;
     static int n, m;
-    static int count;
-    static ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+    static List<List<Integer>> list = new ArrayList<>();
+    static boolean[] visited;
+    static int[] hacking;
+    static Queue<Integer> queue = new LinkedList<>();
 
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st;
-        st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
-        for(int i=0;i<=n;i++){
-            list.add(new ArrayList<>());
-        }
+        for (int i = 0; i <= n; i++) list.add(new ArrayList<>());
+        hacking = new int[n + 1];
+
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            list.get(b).add(a);
+            list.get(a).add(b);
         }
-        int[] result = new int[n + 1];
+
+        int max = 0;
+
         for (int i = 1; i <= n; i++) {
-            visit = new boolean[n + 1];
-            count = 0;
+            visited = new boolean[n + 1];
             bfs(i);
-            result[i] = count;
-            max = Math.max(count, max);
-
         }
+
+        for (int i : hacking) max = Math.max(max, i);
+
         for (int i = 1; i <= n; i++) {
-            if (result[i] == max)
-                sb.append(i+" ");
+            if (hacking[i] == max) sb.append(i + " ");
         }
-        System.out.println(sb);
 
+        System.out.println(sb);
     }
 
-    public static void bfs(int x) {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(x);
-        visit[x] = true;
-        while (!q.isEmpty()) {
-            int v = q.poll();
-            for(int i : list.get(v)){
-                if(!visit[i]){
-                    q.add(i);
-                    visit[i] = true;
-                    count++;
+    static void bfs(int v) {
+        queue.clear();
+        queue.add(v);
+        visited[v] = true;
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            for (int next : list.get(current)) {
+                if (!visited[next]) {
+                    queue.add(next);
+                    visited[next] = true;
+                    hacking[next]++;
                 }
             }
-
         }
+
     }
 
 
