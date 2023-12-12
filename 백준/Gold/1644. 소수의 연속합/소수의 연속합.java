@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Main {
 
+
+    static boolean prime[];
     static List<Integer> numbers;
 
     public static void main(String[] args) throws IOException {
@@ -13,6 +15,7 @@ public class Main {
 
         int N = Integer.parseInt(br.readLine());
         numbers = new ArrayList<>();
+        prime = new boolean[N+1];
 
         int result = 0;
 
@@ -21,20 +24,29 @@ public class Main {
             return;
         }
 
+        numbers.add(0);
 
-        for (int idx = 2; idx <= N; idx++) {
-            ////소수면 numbers에 넣어두기
-            if (isPrime(idx)) {
-                numbers.add(idx);
 
+        for(int i=2;i*i<=N;i++) {
+            if(!prime[i]) {
+                for(int j=i*i;j<=N;j+=i) {
+                    prime[j]=true;
+                }
+            }
+        }
+
+        //누적합 계산
+        for(int idx =2 ; idx <=N;idx++){
+            if(!prime[idx]){
+                numbers.add(idx+numbers.get(numbers.size()-1));
             }
         }
 
         
-        int sum =0;
 
         int start = 0;
-        int end = 0;
+        int end = 1;
+        int size= numbers.size();
         /**
          * 관점
          * 합이 N보다 작은경우
@@ -44,39 +56,25 @@ public class Main {
          * right가 끝까지 도착한경우
          * -> 값이 N보다 큰경우면 right땡기면서 체크진행
          * -> 값이 N보다 작아지면 끝. -> 더이상 값이 증가하지않으니까
-         *
+        *
          */
-        while(start <= end){
-            if(end == numbers.size()-1){
-                sum -= numbers.get(start++);
+        while(end < size){
+            int sum = numbers.get(end) - numbers.get(start);
+            if(sum <= N){
                 if(sum == N){
                     result+=1;
                 }
-
-                continue;
+                end+=1;
+            }else{
+                start +=1;
             }
-            //합이 N을 넘어서는 경우
-            if(sum > N){
-                sum -=numbers.get(start++);
-            }
-            else if(sum <= N){
-                sum +=numbers.get(end++);
-            }
-
-            if(sum == N){
-                result+=1;
-            }
-
-        }
-        //마지막값이 소수이면 +1
-        if(numbers.contains(N)){
-            result+=1;
         }
 
         System.out.println(result);
 
 
     }
+
     private static boolean isPrime(int idx) {
 
         for (int num = 2; num <= Math.sqrt(idx); num++) {
