@@ -39,7 +39,7 @@ public class Main {
                 tmp[0][col] = Math.max(tmp[0][col-1],dp[row-1][col]) + map[row][col];
             }
             tmp[1][m+1] = dp[row-1][m];
-            
+
             //오른쪽 -> 왼쪽 되는겨웅 위쪽과 오른쪽에서 오는 값중 큰값 정하기
             for(int col = m; col >=1; col--){
                 tmp[1][col] = Math.max(tmp[1][col+1],dp[row-1][col]) + map[row][col];
