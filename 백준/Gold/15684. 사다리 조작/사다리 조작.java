@@ -14,8 +14,6 @@ public class Main {
 
     static int res =0;
 
-    static boolean finish = false;
-
 
     public static void main(String[] args) throws IOException{
 
@@ -40,27 +38,18 @@ public class Main {
         //1. 사다리 놓기
         //2. 원하는 결과가 나오는지 체크
         for(int idx = 0; idx <= 3 ;idx++){
-            res = idx;
-            comb(1,0);
-            if(finish) break;
+            comb(1,0,idx);
         }
-
-        if(finish) {
-            System.out.println(res);
-            return;
-        }
-
         System.out.println(-1);
-
 
     }
 
-    private static void comb(int nextrow, int cnt) {
-        if (finish) return;
-        if(cnt == res){
+    private static void comb(int nextrow, int cnt, int idx) {
+        if(cnt == idx){
             //사다리 체크 진행
             if(check()){
-                finish = true;
+                System.out.println(idx);
+                System.exit(0);
             }
 
             return;
@@ -81,7 +70,7 @@ public class Main {
                     continue;
                 }
                 ladder[row][c] = 1;
-                comb(row,cnt+1);
+                comb(row,cnt+1,idx);
                 ladder[row][c] = 0;
             }
         }
