@@ -21,6 +21,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
@@ -29,7 +30,8 @@ public class Main {
         run(N);
         Stack<Integer> s = new Stack<>();
 
-        System.out.println(visited[K]);
+
+        sb.append(visited[K]).append("\n");
 
         int idx = K;
         while (idx != N) {
@@ -39,8 +41,11 @@ public class Main {
         s.push(idx);
 
         while (!s.isEmpty()) {
-            System.out.print(s.pop() + " ");
+            sb.append(s.pop() + " ");
         }
+
+        System.out.println(sb);
+
 
         br.close();
 
