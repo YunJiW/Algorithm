@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class Main {
 
@@ -27,14 +28,25 @@ public class Main {
         for (int idx = 2; idx < N; idx++) {
             res = gcd(res, num[idx] - num[idx - 1]);
         }
+        PriorityQueue<Integer> que = new PriorityQueue<>();
         //전체 숫자에 대한 최대 공약수가 나온다.
         //그 최대 공약수의 약수 출력하기.
         //정수론
-        for (int idx = 2; idx <= res; idx++) {
+        for (int idx = 2; idx <= Math.sqrt(res); idx++) {
             if (res % idx == 0) {
-                sb.append(idx).append(" ");
+                que.offer(idx);
+
+                if (idx != res / idx) {
+                    que.offer(res / idx);
+                }
+
             }
         }
+
+        while (!que.isEmpty()) {
+            sb.append(que.poll()).append(" ");
+        }
+        sb.append(res);
 
 
         System.out.println(sb);
